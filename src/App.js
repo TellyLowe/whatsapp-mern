@@ -6,13 +6,13 @@ import Pusher from 'pusher-js';
 import axios from "./axios";
 
 function App() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState( [] );
 
 useEffect(() => {
-  axios.get('messages/sync').then(response => {
+  axios.get('/messages/sync').then((response) => {
     setMessages(response.data);
   });
-}, [])
+}, []);
 
   useEffect(() => {
     const pusher = new Pusher('9499cfa689e666671e5b', {
@@ -21,6 +21,7 @@ useEffect(() => {
 
     const channel = pusher.subscribe('messages');
     channel.bind('inserted', (newMessage) => {
+      alert(JSON.stringify(newMessage));
       setMessages([...messages, newMessage])
     });
 

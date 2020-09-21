@@ -12,21 +12,22 @@ function Chat({ messages }) {
 
     const sendMessage = async (e) => {
         e.preventDefault();
+    
 
     await axios.post("/messages/new", {
     message: input,
     name: "DEMO APP",
     timestamp: "Just now!",
-    received: false
+    received: true,
     });
 
     setInput('');
 };
-    
     return (
         <div className="chat">
             <div className="chat__header">
                 <Avatar />
+                
 
                 <div className="chat__headerInfo">
                     <h3>Room name</h3>
@@ -48,7 +49,7 @@ function Chat({ messages }) {
 
             <div className="chat__body">
                 {messages.map((message) => (
-                    <p className={`chat__message ${message.received && "chat__reciever"}`}>
+                    <p className={`chat__message ${message.received && "chat__receiver"}`}>
 
                     <span className="chat__name">{message.name} </span>
                     {message.message}
@@ -72,5 +73,6 @@ function Chat({ messages }) {
         </div>
     );
 }
+
 
 export default Chat
