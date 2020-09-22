@@ -11,8 +11,10 @@ function App() {
 useEffect(() => {
   axios.get('/messages/sync').then((response) => {
     setMessages(response.data);
-  });
-}, []);
+  })
+.catch((error) => {
+  console.error(error);
+})}, [])
 
   useEffect(() => {
     const pusher = new Pusher('9499cfa689e666671e5b', {
@@ -29,7 +31,7 @@ useEffect(() => {
       channel.unbind_all()
       channel.unsubscribe();
     };
-  }, [messages]);
+  }, [messages])
 
   console.log(messages)
 
